@@ -9,16 +9,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './task-list.component.scss'
 })
 export class TaskListComponent {
-tasks=[
-  {name: 'item1'},
-  {name: 'item2'},
-  {name: 'item3'}
-]
+tasks:{name: string, createdAt: Date}[]=[];
 newTask:string =''
+showMessage:boolean=false
 addTask(){
   if(this.newTask.trim()){
-    this.tasks.push({name: this.newTask})
+    this.tasks.push({name: this.newTask, createdAt: new Date()})
     this.newTask=''
   }
+}
+toggleMessage(){
+  this.showMessage=!this.showMessage;
 }
 }

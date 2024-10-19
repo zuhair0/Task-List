@@ -5,10 +5,15 @@
             <input [(ngModel)]="newTask" type="text" class="form-control" id="taskName" placeholder="Enter task to add">
         </div>
         <button (click)="addTask()" class="btn btn-primary mt-3">Add Task</button>
+        <button (click)="toggleMessage()" class="btn btn-secondary mt-3 ms-3">Show Message</button>
 </div>
 <div class="container mt-4">
     <h3 class="text-center">Task List</h3>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let task of tasks">{{task.name}}</li>
+        <li class="list-group-item" *ngFor="let task of tasks">
+            {{task.name | uppercase}} - created at: {{task.createdAt | date:'short'}}
+        </li>
+        <p *ngIf="tasks.length===0">No Task Available.</p>
     </ul>
+    <p *ngIf="showMessage">Message is showing</p>
 </div>
