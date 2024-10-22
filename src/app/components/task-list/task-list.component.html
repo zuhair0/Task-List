@@ -4,7 +4,7 @@
             <label for="taskName">Task Name</label>
             <input [(ngModel)]="newTask" type="text" class="form-control" id="taskName" placeholder="Enter task to add">
         </div>
-        <button (click)="addTask()" class="btn btn-primary mt-3">Add Task</button>
+        <button (click)="addTask()" (click)="emptyText()" class="btn btn-primary mt-3">Add Task</button>
         <button (click)="toggleMessage()" class="btn btn-secondary mt-3 ms-3">Show Message</button>
 </div>
 <div class="container mt-4">
@@ -16,4 +16,5 @@
         <p *ngIf="tasks.length===0">No Task Available.</p>
     </ul>
     <p *ngIf="showMessage">Message is showing</p>
+    <p *ngIf="emptyInput">please enter input</p>
 </div>

@@ -12,6 +12,7 @@ export class TaskListComponent {
 tasks:{name: string, createdAt: Date}[]=[];
 newTask:string =''
 showMessage:boolean=false
+emptyInput: boolean=false
 addTask(){
   if(this.newTask.trim()){
     this.tasks.push({name: this.newTask, createdAt: new Date()})
@@ -20,5 +21,8 @@ addTask(){
 }
 toggleMessage(){
   this.showMessage=!this.showMessage;
+}
+emptyText(){
+  this.emptyInput=!this.emptyInput;
 }
 }
