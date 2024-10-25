@@ -1,4 +1,5 @@
-<div class="container mt-4">
+<!-- this commecnted code is for template form validaton to line 36 -->
+<!-- <div class="container mt-4">
     <h3 class="text-center">Add a task</h3>
     <form #taskForm="ngForm"(ngSubmit)="addTask(taskForm)" novalidate>
         <div class="form-group">
@@ -17,6 +18,40 @@
         <div *ngIf="taskInput.invalid && taskInput.touched">
             <p *ngIf="taskInput.errors?.['required']" class="text-danger mt-3">Task name is required.</p>
             <p *ngIf="taskInput.errors?.['minlength']" class="text-danger mt-3">Task min lenght should be 3.</p>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="taskForm.invalid">Add Task</button>
+        <button (click)="toggleMessage()" class="btn btn-secondary mt-3 ms-3">Show Message</button>
+    </form>
+</div>
+<div class="container mt-4">
+    <h3 class="text-center">Task List</h3>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let task of tasks">
+            {{task.name | uppercase}} - created at: {{task.createdAt | date:'short'}}
+        </li>
+        <p *ngIf="tasks.length===0">No Task Available.</p>
+    </ul>
+    <p *ngIf="showMessage">Message is showing</p>
+    <p *ngIf="emptyInput">please enter input</p>
+</div> -->
+
+<!-- this below code is for the rective form validaiton -->
+<div class="container mt-4">
+    <h3 class="text-center">Add a task</h3>
+    <form [formGroup]="taskForm" (submit)="addTask()" novalidate>
+        <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input
+            formControlName="taskName"
+            type="text" 
+            class="form-control" 
+            id="taskName" 
+            name="taskName"
+            placeholder="Enter task to add" >
+        </div>
+        <div *ngIf="taskForm.get('taskName')?.invalid && taskForm.get('taskName')?.touched">
+            <p *ngIf="taskForm.get('taskName')?.errors?.['required']" class="text-danger mt-3">Task name is required.</p>
+            <p *ngIf="taskForm.get('taskName')?.errors?.['minlength']" class="text-danger mt-3">Task min lenght should be 3.</p>
         </div>
         <button type="submit" class="btn btn-primary mt-3" [disabled]="taskForm.invalid">Add Task</button>
         <button (click)="toggleMessage()" class="btn btn-secondary mt-3 ms-3">Show Message</button>
