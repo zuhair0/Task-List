@@ -1,11 +1,26 @@
 <div class="container mt-4">
     <h3 class="text-center">Add a task</h3>
+    <form #taskForm="ngForm"(ngSubmit)="addTask(taskForm)" novalidate>
         <div class="form-group">
             <label for="taskName">Task Name</label>
-            <input [(ngModel)]="newTask" type="text" class="form-control" id="taskName" placeholder="Enter task to add">
+            <input [(ngModel)]="newTask" 
+            type="text" 
+            class="form-control" 
+            id="taskName" 
+            name="taskName"
+            placeholder="Enter task to add" 
+            required
+            minlength="3"
+            #taskInput="ngModel"
+            >
         </div>
-        <button (click)="addTask()" (click)="emptyText()" class="btn btn-primary mt-3">Add Task</button>
+        <div *ngIf="taskInput.invalid && taskInput.touched">
+            <p *ngIf="taskInput.errors?.['required']" class="text-danger mt-3">Task name is required.</p>
+            <p *ngIf="taskInput.errors?.['minlength']" class="text-danger mt-3">Task min lenght should be 3.</p>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="taskForm.invalid">Add Task</button>
         <button (click)="toggleMessage()" class="btn btn-secondary mt-3 ms-3">Show Message</button>
+    </form>
 </div>
 <div class="container mt-4">
     <h3 class="text-center">Task List</h3>
